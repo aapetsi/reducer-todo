@@ -3,7 +3,7 @@ import './App.css'
 
 const ADD_TODO = 'ADD_TODO'
 const MARK_TODO = 'MARK_TODO'
-const DELETE_TODOS = 'DELETE_TODOS'
+const DELETE_COMPLETED_TODOS = 'DELETE_TODOS'
 
 const initialState = [
   { id: 1, task: 'write code', completed: false },
@@ -25,8 +25,8 @@ const reducer = (state, action) => {
           complete: action.payload.isComplete
         }
       })
-    case DELETE_TODOS:
-      return state
+    case DELETE_COMPLETED_TODOS:
+      return state.filter(todo => todo.completed === false)
     default:
       return state
   }
@@ -55,6 +55,10 @@ const App = () => {
     })
   }
 
+  const deleteCompleted = () => {
+    dispatch({ type: DELETE_COMPLETED_TODOS })
+  }
+
   return (
     <div className='App'>
       <h1>Todo app</h1>
@@ -80,7 +84,7 @@ const App = () => {
         <input type='text' />
         <button>Add Todo</button>
       </form>
-      <button>Delete All</button>
+      <button onClick={deleteCompleted}>Delete Completed</button>
     </div>
   )
 }
