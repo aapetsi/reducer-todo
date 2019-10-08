@@ -16,7 +16,6 @@ const reducer = (state, action) => {
     case ADD_TODO:
       return [...state, action.payload]
     case MARK_TODO:
-      console.log(action.payload)
       return state.map(todo => {
         if (todo.id !== action.payload.id) return todo
         return {
@@ -80,7 +79,7 @@ const App = () => {
           </div>
         ))}
       </ul>
-      <form onSubmit={addTodo}>
+      <form className='form' onSubmit={addTodo}>
         <input type='text' />
         <button>Add Todo</button>
       </form>
